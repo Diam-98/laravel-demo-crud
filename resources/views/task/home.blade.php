@@ -15,27 +15,28 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($tasks as $task)
             <tr>
-                <td>Tache 1</td>
-                <td>Lorem ipsum</td>
+                <td>{{ $task->title }}</td>
+                <td>{{ $task->description }}</td>
                 <td>
-{{--                    @if($task->completed)--}}
+                    @if($task->isCompleted)
                         <span class="badge text-bg-success">Terminée</span>
-{{--                    @else--}}
-{{--                        <span class="badge badge-warning">En cours</span>--}}
-{{--                    @endif--}}
+                    @else
+                        <span class="badge text-bg-warning">En cours</span>
+                    @endif
 
                 </td>
-                <td>
-                    <a href="" class="btn btn-sm btn-primary">Éditer</a>
-                    <form action="" method="POST" style="display: inline;">
+                <td class="d-flex align-items-center">
+                    <a href="{{ route('edit', $task->id) }}" class="btn btn-sm btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <form action="{{ route('destroy', $task->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">Supprimer</button>
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')"><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
-{{--        @endforeach--}}
+        @endforeach
         </tbody>
     </table>
 @endsection
