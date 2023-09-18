@@ -2,7 +2,7 @@
 
 @section('content')
     <h3>@if(isset($task)) Modification @else Ajout @endif d'une tache</h3>
-    <form action="{{ isset($task) ? route('update', $task->id) : route('store') }}" method="post">
+    <form action="{{ isset($task) ? route('task.update', $task->id) : route('task.store') }}" method="post">
         @csrf
         @if(isset($task))
             @method('PUT')

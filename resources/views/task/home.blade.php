@@ -1,7 +1,11 @@
 @extends('task.layout')
 
 @section('content')
-    <a href="{{ route('create') }}" class="btn btn-primary mb-3">Ajouter une tâche</a>
+    <div class="d-flex align-items-center">
+        <a href="{{ route('task.create') }}" class="btn btn-primary mb-3">Ajouter une tâche</a>
+        <a href="{{ route('logout') }}" class="btn btn-primary mb-3">Deconnection</a>
+    </div>
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -28,8 +32,8 @@
 
                 </td>
                 <td class="d-flex align-items-center">
-                    <a href="{{ route('edit', $task->id) }}" class="btn btn-sm btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <form action="{{ route('destroy', $task->id) }}" method="POST" style="display: inline;">
+                    <a href="{{ route('task.edit', $task->id) }}" class="btn btn-sm btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <form action="{{ route('task.destroy', $task->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')"><i class="fa-solid fa-trash"></i></button>
